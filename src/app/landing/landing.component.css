@@ -1,0 +1,229 @@
+@import "../styles/elements.css";
+
+.landing__section{
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  min-height: auto;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.landing__container{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  align-items: center;
+}
+
+.landing__first{
+  background-image: url("../../assets/img/header.png");
+}
+
+.landing__header{
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 22px 24px;
+  justify-content: flex-end;
+}
+
+.landing__button {
+  position: fixed;
+  z-index: 99;
+  top: 22px;
+  right: 24px;
+  background-color: rgba(213, 23, 21, .2);
+  border: 2px solid #e74c3c !important;
+  border-radius: 0.6em;
+  color: #e74c3c;
+  cursor: pointer;
+  display: flex;
+  font-size: 17px;
+  line-height: 1;
+  padding: 20px 45px !important;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.landing__button:hover, .landing__button:active {
+  color: #fff;
+}
+
+.landing__button:hover {
+  box-shadow: 0 0 40px 40px #e74c3c inset;
+}
+
+.landing__center-text{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing__first-text{
+  letter-spacing: 12px;
+  text-transform: uppercase;
+}
+
+.landing__first-text div:first-child{
+  font-family: Lato;
+  font-weight: 100;
+  font-size: 45px;
+  margin-bottom: 37px;
+}
+
+.landing__first-text div:nth-child(2) {
+  font-family: OpenSans;
+  font-weight: 700;
+  font-size: 100px;
+  margin-bottom: 50px;
+}
+
+.landing__first-text div:nth-child(3) {
+  letter-spacing: 4px;
+  font-size: 60px;
+  margin-bottom: 60px;
+  font-family: Lato;
+}
+
+.landing__second-text{
+  text-align: center;
+}
+
+.landing__second-text div:first-child {
+  font-family: Merriweather;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 60px;
+  margin-bottom: 30px;
+}
+
+.landing__second{
+  background: linear-gradient(90deg, #134E5E 10%, #71B280 90%);
+}
+
+.landing__second-text div:nth-child(2) {
+  font-family: Vollkorn;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  font-weight: 700;
+  font-size: 100px;
+  margin-bottom: 12px;
+}
+
+.landing__third{
+  background-color: #FCF751;
+}
+
+.landing__third-text div{
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.landing__third-text div:first-child{
+  font-family: Raleway;
+  font-weight: 100;
+  font-size: 45px;
+  margin-bottom: -45px;
+}
+
+.landing__third-text div:nth-child(2){
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 140px;
+}
+
+.landing__fourth{
+  background: linear-gradient(90deg, #485563 10%, #29323c 90%);
+}
+
+.landing__fourth-text div {
+  color: white;
+}
+
+.landing__fourth-text div:first-child{
+  font-family: BreeSerif;
+  font-weight: 400;
+  font-size: 100px;
+  margin-bottom: 15px;
+}
+
+.landing__fourth-text div:first-child:before, .landing__fourth-text div:first-child:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 140px;
+  right: -200px;
+  background-color: transparent;
+  height: 8px;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  top: 34%;
+  margin-bottom: -4px;
+}
+
+.landing__fourth-text div:first-child:before{
+  left: -200px;
+}
+
+.landing__fourth-text div:nth-child(2){
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  font-family: Oswald;
+  font-weight: 400;
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+.landing__footer{
+  background-image: url("../../assets/img/footer.png");
+}
+
+.landing__footer-text div:first-child{
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 148px;
+}
+
+.landing__footer-text div:nth-child(2){
+  font-family: Montserrat;
+  position: absolute;
+  background-color: hsla(0,0%,0%,0.6);
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0ad00;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.landing__footer-rights{
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: Lato;
+  font-weight: 300;
+}

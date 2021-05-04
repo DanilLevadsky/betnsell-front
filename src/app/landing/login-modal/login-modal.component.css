@@ -1,0 +1,10 @@
+@import '../landing.component.css';
+
+.login-modal__or{
+  font-size: 12px;
+  line-height: 15px;
+  color: #242426;
+  margin: 8px 0;
+  width: 100%;
+  text-align: center;
+}

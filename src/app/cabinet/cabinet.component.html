@@ -1,0 +1,18 @@
+<div class="cabinet" *ngIf="cabinetInited">
+  <header class="cabinet__header">
+    <button class="cabinet__exit" (click)="onExitClick()">Выйти</button>
+    <div class="cabinet__user-info">
+      <div class="cabinet__user-content" (click)="onProfileClick()">
+        <img alt="avatar" class="cabinet__avatar" [src]="user.profilePic || ImageConstants.DEFAULT_AVATAR">
+        <div class="cabinet__nickname">{{user.username}}</div>
+      </div>
+      <div class="cabinet__balance">
+        <div class="cabinet__balance-amount">balance - {{user.balance}}</div>
+        <img alt="gold" src="assets/img/gold.svg" class="cabinet__gold">
+      </div>
+    </div>
+  </header>
+  <div class="cabinet__content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

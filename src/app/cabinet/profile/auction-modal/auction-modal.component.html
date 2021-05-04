@@ -1,0 +1,43 @@
+<nz-modal (nzOnCancel)="onCancel()"
+          [(nzVisible)]="isActive"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          [nzTitle]="modalTitle"
+          [nzCloseIcon]="empty"
+          nzClassName="common-modal">
+</nz-modal>
+
+<ng-template #modalTitle>
+  <div class="go-back" (click)="onBackClick()">
+    <img alt="back" src="assets/img/back.svg" class="modal__go-back-img">
+    <div class="modal__go-back">Go back</div>
+  </div>
+</ng-template>
+
+<ng-template #modalContent>
+  <div class="common-modal__header">Create your new auction</div>
+  <div class="common-modal__sub-header">Please, fill in the fields above</div>
+  <form (submit)="createAuction()" [formGroup]="form" class="" nz-form>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Select auction finish date</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Choose date">
+        <nz-date-picker formControlName="lotFinishDate"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Product</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Только цифры, макс. 32">
+        <nz-select formControlName="productId">
+          <nz-option *ngFor="let option of user.products" [nzValue]="option.id" [nzLabel]="option.title"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <button [disabled]="form.invalid"
+            class="common-button common-modal__submit" type="submit">Create
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #modalFooter></ng-template>
+<ng-template #empty></ng-template>
+

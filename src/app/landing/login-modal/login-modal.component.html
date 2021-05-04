@@ -1,0 +1,47 @@
+<nz-modal (nzOnCancel)="onCancel()"
+          [(nzVisible)]="isActive"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          [nzTitle]="modalTitle"
+          [nzCloseIcon]="empty"
+          nzClassName="common-modal">
+</nz-modal>
+
+<ng-template #modalTitle>
+  <div class="go-back" (click)="onBackClick()">
+    <img alt="back" src="assets/img/back.svg" class="modal__go-back-img">
+    <div class="modal__go-back">Go back</div>
+  </div>
+</ng-template>
+
+<ng-template #modalContent>
+  <div class="common-modal__header reg-modal__header">Log into your account</div>
+  <div class="common-modal__sub-header">For the purpose of industry regulation, your details are required.</div>
+  <form (submit)="submitForm()" [formGroup]="form" class="reg-modal__form" nz-form>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Your email address or nickname*</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Неверный формат почты или никнейма">
+        <label><input placeholder="Email or nickname" class="common-modal__input" formControlName="login" nz-input type="text"
+                      (keydown.enter)="onEmailEntered($event)"
+        ></label>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Your password*</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 32">
+        <label><input type="password" placeholder="Password" #password class="common-modal__input"
+                      formControlName="password" nz-input
+                      (keydown.enter)="onPasswordEntered($event)"
+        ></label>
+      </nz-form-control>
+    </nz-form-item>
+    <button [disabled]="isSubmitDisabled || form.invalid"
+            class="common-button common-modal__submit" type="submit">Отправить
+    </button>
+    <div class="login-modal__or">or</div>
+    <button class="common-button common-modal__sub-button" (click)="onRegisterClick($event)">Зарегистрироваться</button>
+  </form>
+</ng-template>
+
+<ng-template #modalFooter></ng-template>
+<ng-template #empty></ng-template>

@@ -1,0 +1,158 @@
+@import "../../styles/elements.css";
+
+.profile {
+  display: flex;
+  width: 100%;
+}
+
+.profile__container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  flex-direction: column;
+  margin: auto;
+}
+
+.profile__input-title{
+  font-size: 22px;
+  line-height: 32px;
+  color: lightgoldenrodyellow;
+  margin-bottom: 12px;
+}
+
+.profile__save-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 26px;
+  color: whitesmoke;
+  background: darkseagreen;
+  position: absolute;
+  height: 100%;
+  width: auto;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: all .3s ease-in-out;
+  border: none;
+}
+
+.profile__save-button:hover{
+  background: mediumseagreen;
+}
+
+.profile__save-button:active{
+  background: forestgreen;
+}
+
+.profile__save-button:disabled{
+  opacity: .4;
+  pointer-events: none;
+}
+
+.profile__forms{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__form-section{
+  flex: 1 1 50%;
+}
+
+.profile__form-section:first-child{
+  margin-right: 48px;
+}
+
+.profile__types{
+  display: flex;
+  width: 100%;
+}
+
+.profile__type{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease-in-out;
+  height: 32px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: slategrey;
+  border: black;
+  color: white;
+  padding: 0 10px;
+}
+
+.profile__type:first-child{
+  margin-right: 12px;
+}
+
+.profile__type_active{
+  background: lightseagreen !important;
+}
+
+.profile__type:hover{
+  background: darkseagreen;
+}
+.profile__type:active{
+  background: lightgrey;
+}
+
+.profile__list-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile__no-products, .profile__no-auctions{
+  display: flex;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 6px;
+}
+
+.profile__no-products-text, .profile__no-auctions-text{
+  color: white;
+  font-size: 24px;
+  line-height: 38px;
+  margin-bottom: 12px;
+}
+
+.create-button{
+  padding: 0 18px;
+  height: 56px;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  line-height: 34px;
+  background: ghostwhite;
+  color: black;
+}
+
+.create-button:hover{
+  background: papayawhip;
+}
+
+.create-button:active{
+  background: navajowhite;
+}
+
+.profile__no-content{
+  width: 200px;
+  height: 200px;
+}
+
+.profile__no-products-button{
+
+}
+
+
+

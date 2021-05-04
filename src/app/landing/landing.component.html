@@ -1,0 +1,66 @@
+<div class="landing">
+  <section class="landing__section landing__first">
+    <button class="landing__button" (click)="onOpenLoginModal()">Начать</button>
+    <div class="landing__container">
+      <header class="landing__header"></header>
+      <div class="landing__center-text landing__first-text">
+        <div>Respectable</div>
+        <div>Gambling-platform</div>
+        <div>For the goods sale</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__section landing__second">
+    <div class="landing__container">
+      <div class="landing__center-text landing__second-text">
+        <div>Two-factor</div>
+        <div>registration and authorization</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__section landing__third">
+    <div class="landing__container">
+      <div class="landing__center-text landing__third-text">
+        <div>Tickets</div>
+        <div>Purchase</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__section landing__fourth">
+    <div class="landing__container">
+      <div class="landing__center-text landing__fourth-text">
+        <div>Lot creating and</div>
+        <div>editing</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="landing__section landing__footer">
+    <div class="landing__container">
+      <div class="landing__center-text landing__footer-text">
+        <div>Don`t <br> break</div>
+        <div>What are you waiting for?</div>
+      </div>
+      <div class="landing__footer-rights">
+        © BetNSell, @otec_valerian, @AshBringer47, @danillevadsky. All rights reserved 2021.
+      </div>
+    </div>
+  </footer>
+
+
+  <app-register-modal [onSuccess]="handleRegister"
+                      [onCancel]="onCancelRegModal"
+                      [isActive]="isRegModalActive"
+                      [isSubmitDisabled]="isSubmitDisabled"
+                      [changeModal]="changeRegToLoginModal"></app-register-modal>
+  <app-login-modal [onSuccess]="handleLogin"
+                   [onCancel]="onCancelLoginModal"
+                   [isActive]="isLoginModalActive"
+                   [isSubmitDisabled]="isSubmitDisabled" [changeModal]="changeLoginToRegModal"></app-login-modal>
+
+</div>
+
+
