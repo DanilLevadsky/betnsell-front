@@ -33,4 +33,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region eu-west-1 \
-            dist/betnsell-front s3://betnsell.tech
+            dist/node-project-front-end s3://betnsell.tech
