@@ -16,6 +16,7 @@ import {Auction} from '../../../api/model/auction/Auction';
 import {ImageConstants} from '../../../api/constants/ImageConstants';
 import {AuctionsService} from '../../../api/service/auctions.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-profile',
@@ -47,10 +48,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   totalAuctionsPages: number;
 
 
-  constructor(private userService: UserService,
+  constructor(public userService: UserService,
               private productService: ProductService,
               private fb: FormBuilder,
-              private notifications: NzNotificationService,
               private route: ActivatedRoute,
               private router: Router,
               private auctionService: AuctionsService,
@@ -85,13 +85,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   successProductCreation = () => {
     this.initProducts();
     this.closeProductModal();
-    this.notifications.success('Успех!', 'Вы успешно создали новый товар');
+    // this.notifications.success('Успех!', 'Вы успешно создали новый товар');
   };
 
   successAuctionCreation = (auction: Auction) => {
     this.initAuctions();
     this.closeAuctionModal();
-    this.notifications.success('Успех!', 'Вы успешно создали новый аукцион');
+    // this.notifications.success('Успех!', 'Вы успешно создали новый аукцион');
   };
 
   initForms(): void {
@@ -131,10 +131,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.user = this.userService.userProfile.getValue();
-    this.initForms();
-    this.initValuesChange();
-    this.initProducts();
-    this.initAuctions();
+    if (this.user){
+      this.initForms();
+      this.initValuesChange();
+      this.initProducts();
+      this.initAuctions();
+    }
   }
 
   initProducts(): void {
@@ -171,7 +173,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserEmail(request).subscribe(() => {
       this.userService.changeEmail(request);
       this.disableEmailChange = true;
-      this.notifications.success('Успех!', 'Вы удачно сменили почту');
+      // this.notifications.success('Успех!', 'Вы удачно сменили почту');
     });
   }
 
@@ -180,7 +182,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserUsername(request).subscribe(() => {
       this.userService.changeNickname(request);
       this.disableUsernameChange = true;
-      this.notifications.success('Успех!', 'Вы удачно сменили юзернейм');
+      // this.notifications.success('Успех!', 'Вы удачно сменили юзернейм');
     });
   }
 
@@ -189,7 +191,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserMobile(request).subscribe(() => {
       this.userService.changeMobile(request);
       this.disableMobileChange = true;
-      this.notifications.success('Успех!', 'Вы удачно сменили телефон');
+      // this.notifications.success('Успех!', 'Вы удачно сменили телефон');
     });
   }
 
@@ -198,7 +200,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserName(request).subscribe(() => {
       this.userService.changeName(request);
       this.disableNameChange = true;
-      this.notifications.success('Успех!', 'Вы удачно сменили имя');
+      // this.notifications.success('Успех!', 'Вы удачно сменили имя');
     });
   }
 

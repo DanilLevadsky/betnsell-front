@@ -44,6 +44,9 @@ import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {NzPaginationModule} from 'ng-zorro-antd/pagination';
 import { AuctionComponent } from './cabinet/auction/auction.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {Overlay, OverlayModule} from '@angular/cdk/overlay';
+import {TestUserService} from '../api/service/test-services/test-user.service';
+
 
 registerLocaleData(en);
 
@@ -68,6 +71,7 @@ export function initApp(configService: ConfigService): any {
     AuctionComponent
   ],
   imports: [
+    OverlayModule,
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
     NzNotificationModule,
@@ -85,6 +89,7 @@ export function initApp(configService: ConfigService): any {
     NzSpinModule,
     NzPaginationModule,
     NgxSpinnerModule
+
   ],
   providers: [
     LandingGuard,
@@ -95,6 +100,8 @@ export function initApp(configService: ConfigService): any {
     UserService,
     ProductService,
     AuctionsService,
+    HttpClientModule,
+    TestUserService,
     {
       provide: APP_INITIALIZER,
       useFactory: initApp,

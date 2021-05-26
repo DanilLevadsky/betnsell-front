@@ -10,9 +10,9 @@
           <nz-form-item class="common-modal__item">
             <div class="profile__input-title">Your e-mail address</div>
             <nz-form-control nzErrorTip="Неверный формат почты" class="common-modal__field-control">
-              <label><input placeholder="Email" class="common-modal__input" formControlName="email" nz-input type="text"
+              <label><input placeholder="Email" class="common-modal__input email" formControlName="email" nz-input type="text"
               >
-                <button [disabled]="disableEmailChange" class="profile__save-button" (click)="onEmailChangeClick()">
+                <button [disabled]="disableEmailChange" class="profile__save-button email-button" (click)="onEmailChangeClick()">
                   Сохранить
                 </button>
               </label>
@@ -66,16 +66,16 @@
     </div>
     <div class="profile__options">
       <div class="profile__types">
-        <div class="profile__type" (click)="onTypeClick(profileListType.PRODUCTS)"
+        <div class="profile__type products" (click)="onTypeClick(profileListType.PRODUCTS)"
              [class.profile__type_active]="chosenType === profileListType.PRODUCTS">Products
         </div>
-        <div class="profile__type" (click)="onTypeClick(profileListType.AUCTIONS)"
+        <div class="profile__type auctions" (click)="onTypeClick(profileListType.AUCTIONS)"
              [class.profile__type_active]="chosenType === profileListType.AUCTIONS">Auctions
         </div>
       </div>
       <div class="profile__create-button active-button" (click)="onCreateClick()">
         <img alt="add" class="profile__create-button-img" src="assets/img/add-plus.svg">
-        <div class="profile__create-button-text">Create</div>
+        <div class="profile__create-button-text create">Create</div>
       </div>
     </div>
     <div class="profile__list-container" *ngIf="chosenType === profileListType.PRODUCTS">
@@ -130,12 +130,12 @@
   </div>
 </ng-template>
 
-<app-product-modal [onSuccess]="successProductCreation"
-                   [onCancel]="closeProductModal"
+<app-product-modal [success]="successProductCreation"
+                   [cancel]="closeProductModal"
                    [isActive]="isProductModalOpened"></app-product-modal>
 
-<app-auction-modal [onSuccess]="successAuctionCreation"
-                   [onCancel]="closeAuctionModal"
+<app-auction-modal [success]="successAuctionCreation"
+                   [cancel]="closeAuctionModal"
                    [isActive]="isAuctionModalOpened"
                    [product]="productForAuctionModal"></app-auction-modal>
 

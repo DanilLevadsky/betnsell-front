@@ -17,8 +17,8 @@ import {Product} from '../../../../api/model/product/Product';
 })
 export class AuctionModalComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() onCancel;
-  @Input() onSuccess;
+  @Input() cancel;
+  @Input() success;
   @Input() isActive;
   @Input() product: Product;
   form: FormGroup;
@@ -31,7 +31,7 @@ export class AuctionModalComponent implements OnInit, OnDestroy, OnChanges {
   isProductsLoading: boolean = false;
 
   constructor(private fb: FormBuilder,
-              private userService: UserService,
+              public userService: UserService,
               private auctionService: AuctionsService,
               private productService: ProductService) {
     this.form = this.fb.group({
@@ -107,13 +107,13 @@ export class AuctionModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onBackClick(): void {
-    this.onCancel();
+    this.cancel();
   }
 
   createAuction(): void {
     const request: AuctionCreateRequest = this.form.value;
     this.auctionService.createAuction(request).subscribe((auction) => {
-      this.onSuccess(auction);
+      this.success(auction);
     });
   }
 }

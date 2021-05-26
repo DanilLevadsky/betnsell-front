@@ -11,13 +11,13 @@ import {ProductService} from '../../../../api/service/product.service';
 })
 export class ProductModalComponent implements OnInit {
 
-  @Input() onCancel;
-  @Input() onSuccess;
+  @Input() cancel;
+  @Input() success;
   @Input() isActive;
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private userService: UserService,
+              public userService: UserService,
               private productService: ProductService) {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.pattern(/^[\S\s]{8,100}$/)]],
@@ -36,13 +36,13 @@ export class ProductModalComponent implements OnInit {
   }
 
   onBackClick(): void {
-    this.onCancel();
+    this.cancel();
   }
 
   createProduct(): void {
     const request: ProductCreateRequest = this.form.value;
     this.productService.createProduct(request).subscribe((product) => {
-      this.onSuccess(product);
+      this.success(product);
     });
   }
 
