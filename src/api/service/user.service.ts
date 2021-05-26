@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ConfigService} from './config.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {UserAuthResponse} from '../response/auth/UserAuthResponse';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ProductsResponse} from '../response/products/ProductsResponse';
@@ -11,6 +11,10 @@ import {UpdatedUserEmail} from '../request/user/UpdatedUserEmail';
 import {UpdatedUserPassword} from '../request/user/UpdatedUserPassword';
 import {UpdatedUserName} from '../request/user/UpdatedUserName';
 import {UpdatedUserMobile} from '../request/user/UpdatedUserMobile';
+import {PaginationResponse} from '../response/pagination/PaginationResponse';
+import {Auction} from '../model/auction/Auction';
+import {BaseService} from './base.service';
+import {Product} from '../model/product/Product';
 
 @Injectable()
 export class UserService {
@@ -20,7 +24,8 @@ export class UserService {
   isInited: boolean = false;
 
   constructor(private config: ConfigService,
-              private httpClient: HttpClient) {
+              private httpClient: HttpClient,
+              private baseService: BaseService) {
     this.apiUrl = `http://127.0.0.1:3000/users`;
     // setTimeout(() => {
     //
@@ -73,5 +78,15 @@ export class UserService {
 
   changeMobile(mobile: UpdatedUserMobile): void {
     this.setUser(Object.assign(this.userProfile.getValue(), mobile));
+  }
+
+  getUserProducts(userId: number, page: number = 1, perPage: number = 2): Observable<PaginationResponse<Array<Product>>> {
+    return this.httpClient.get<PaginationResponse<Array<Product>>>(`${this.apiUrl}/${userId}/products`,
+      {params: this.baseService.getPaginationParams(page, perPage)});
+  }
+
+  getUserAuctions(userId: number, page: number = 1, perPage: number = 4): Observable<PaginationResponse<Array<Auction>>> {
+    return this.httpClient.get<PaginationResponse<Array<Auction>>>(`${this.apiUrl}/${userId}/auctions`,
+      {params: this.baseService.getPaginationParams(page, perPage)});
   }
 }

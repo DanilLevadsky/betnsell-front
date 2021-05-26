@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {forkJoin, Subscription} from 'rxjs';
 import {UserResponse} from '../../../api/response/users/UserResponse';
 import {Product} from '../../../api/model/product/Product';
 import {UserService} from '../../../api/service/user.service';
@@ -15,6 +15,7 @@ import {ProfileListType} from '../../../api/model/profile/ProfileListType';
 import {Auction} from '../../../api/model/auction/Auction';
 import {ImageConstants} from '../../../api/constants/ImageConstants';
 import {AuctionsService} from '../../../api/service/auctions.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   subscriptions: Array<Subscription> = [];
   user: UserResponse;
+  userProducts: Array<Product | null> = new Array(2).fill(null);
+  userAuctions: Array<Auction | null> = new Array(2).fill(null);
   profileInited: boolean = false;
   changeEmailForm: FormGroup;
   changeUsernameForm: FormGroup;
@@ -37,6 +40,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   chosenType: ProfileListType = ProfileListType.PRODUCTS;
   isProductModalOpened: boolean = false;
   isAuctionModalOpened: boolean = false;
+  productForAuctionModal: Product;
+  currentProductsPage: number = 1;
+  currentAuctionsPage: number = 1;
+  totalProductsPages: number;
+  totalAuctionsPages: number;
 
 
   constructor(private userService: UserService,
@@ -45,11 +53,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private notifications: NzNotificationService,
               private route: ActivatedRoute,
               private router: Router,
-              private auctionService: AuctionsService) {
+              private auctionService: AuctionsService,
+              private spinner: NgxSpinnerService) {
   }
 
   get profileListType(): typeof ProfileListType {
     return ProfileListType;
+
   }
 
   get imageConstants(): typeof ImageConstants {
@@ -72,15 +82,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.isAuctionModalOpened = false;
   };
 
-  successProductCreation = (product: Product) => {
+  successProductCreation = () => {
+    this.initProducts();
     this.closeProductModal();
-    this.productService.addProduct(product);
     this.notifications.success('Успех!', 'Вы успешно создали новый товар');
   };
 
   successAuctionCreation = (auction: Auction) => {
+    this.initAuctions();
     this.closeAuctionModal();
-    this.auctionService.setAuction(auction);
     this.notifications.success('Успех!', 'Вы успешно создали новый аукцион');
   };
 
@@ -120,31 +130,36 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.user = this.userService.userProfile.getValue();
-      this.initForms();
-      this.initValuesChange();
-      // if (!params.id) {
-      //   this.router.navigate(['/cabinet/profile', this.user.id]);
-      // }
-    });
-    // this.initSubscriptions();
+    this.user = this.userService.userProfile.getValue();
+    this.initForms();
+    this.initValuesChange();
+    this.initProducts();
+    this.initAuctions();
   }
 
-  // initSubscriptions(): void {
-  //   const userPromise = new Promise(((resolve, reject) => {
-  //     this.subscriptions.push(this.userService.userProfile.subscribe(user => {
-  //       this.user = user;
-  //       this.initFormValues(user);
-  //       resolve(user);
-  //     }));
-  //   }));
-  //   userPromise.then(user => {
-  //     // @ts-ignore
-  //     this.subscriptions.push(this.productService.getUserProducts(user.id).subscribe(products => this.userProducts = products));
-  //     this.profileInited = true;
-  //   });
-  // }
+  initProducts(): void {
+    this.userService.getUserProducts(this.user.id, this.currentProductsPage).subscribe(products => {
+      this.totalProductsPages = products.totalPages;
+      this.userProducts = products.content;
+    });
+  }
+
+  initAuctions(): void {
+    this.userService.getUserAuctions(this.user.id, this.currentAuctionsPage).subscribe(auctions => {
+      this.totalAuctionsPages = auctions.totalPages;
+      this.userAuctions = auctions.content;
+    })
+  }
+
+  updateUserProducts(page: number): void {
+    this.currentProductsPage = page;
+    this.initProducts();
+  }
+
+  updateUserAuctions(page: number): void {
+    this.currentAuctionsPage = page;
+    this.initAuctions();
+  }
 
 
   ngOnDestroy(): void {
@@ -155,6 +170,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const request: UpdatedUserEmail = new UpdatedUserEmail(this.changeEmailForm.controls.email.value);
     this.userService.updateUserEmail(request).subscribe(() => {
       this.userService.changeEmail(request);
+      this.disableEmailChange = true;
       this.notifications.success('Успех!', 'Вы удачно сменили почту');
     });
   }
@@ -163,6 +179,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const request: UpdatedUserUsername = new UpdatedUserUsername(this.changeUsernameForm.controls.username.value);
     this.userService.updateUserUsername(request).subscribe(() => {
       this.userService.changeNickname(request);
+      this.disableUsernameChange = true;
       this.notifications.success('Успех!', 'Вы удачно сменили юзернейм');
     });
   }
@@ -171,6 +188,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const request: UpdatedUserMobile = new UpdatedUserMobile(this.changeMobileForm.controls.mobile.value);
     this.userService.updateUserMobile(request).subscribe(() => {
       this.userService.changeMobile(request);
+      this.disableMobileChange = true;
       this.notifications.success('Успех!', 'Вы удачно сменили телефон');
     });
   }
@@ -179,6 +197,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const request: UpdatedUserName = new UpdatedUserName(this.changeNameForm.controls.name.value);
     this.userService.updateUserName(request).subscribe(() => {
       this.userService.changeName(request);
+      this.disableNameChange = true;
       this.notifications.success('Успех!', 'Вы удачно сменили имя');
     });
   }
@@ -187,11 +206,29 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.chosenType = section;
   }
 
-  deleteProduct(id: number): void {
-    this.productService.deleteProduct(id).subscribe(() => {
-      this.productService.removeProductFromList(id);
-      this.notifications.success('Успех!', 'Вы удачно удалили товар');
-    });
+  onCreateClick(): void {
+    if (this.chosenType === ProfileListType.AUCTIONS) {
+      this.productForAuctionModal = null;
+      this.openAuctionModal();
+    } else if (this.chosenType === ProfileListType.PRODUCTS) {
+      this.openProductModal();
+    }
   }
 
+  deleteProduct = (id: number): void => {
+    this.userProducts = this.userProducts.filter(product => product.id !== id );
+  }
+
+  updateProduct = (updatedProduct: Product): void => {
+    this.userProducts = this.userProducts.map(product => product.id === updatedProduct.id ? updatedProduct : product);
+  }
+
+  openAuctionModalWithProduct = (product: Product): void => {
+    this.productForAuctionModal = product;
+    this.openAuctionModal()
+  }
+
+  onBackClick(): void {
+    this.router.navigate(['/app/']);
+  }
 }

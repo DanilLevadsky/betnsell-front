@@ -1,15 +1,32 @@
+import {Product} from '../product/Product';
+import {Ticket} from './Ticket';
+import {AuctionStatus} from './AuctionStatus';
+
 export class Auction {
   id: number;
-  productId: number;
+  product: Product;
   createdAt: string;
   lotFinishDate: string;
   lotExpireDate: string;
+  pricePerTicket: number;
+  totalTickets: number;
+  winnerId: number;
+  totalPrice: number;
+  tickets: Array<Ticket>;
+  status: AuctionStatus;
 
-  constructor(id: number, productId: number, createdAt: string, lotFinishDate: string, lotExpireDate: string){
+  constructor(id: number, createdAt: string, lotFinishDate: string, lotExpireDate: string, pricePerTicket: number,
+              totalTickets: number, winnerId: number, product: Product, totalPrice: number, tickets: Array<Ticket>,
+              status: AuctionStatus) {
     this.id = id;
-    this.productId = productId;
     this.createdAt = createdAt;
     this.lotExpireDate = lotExpireDate;
     this.lotFinishDate = lotFinishDate;
+    this.pricePerTicket = pricePerTicket;
+    this.totalTickets = totalTickets;
+    this.winnerId = winnerId;
+    this.product = product;
+    this.totalPrice = totalPrice;
+    this.tickets = tickets;
   }
 }

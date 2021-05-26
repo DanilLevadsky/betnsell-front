@@ -1,0 +1,40 @@
+<div class="auction" *ngIf="auction">
+  <div class="auction__container">
+    <div class="auction__product">
+      <div class="auction__product-img-container">
+        <img class="auction__product-img" alt="photo" [src]="imageConstants.NO_PHOTO">
+      </div>
+      <div class="auction__product-title">{{auction.product.title}}</div>
+      <div class="auction__product-description">{{auction.product.description}}</div>
+      <div class="auction__time" *ngIf="finishDate as date">Auction will end in {{date.days}} d. {{date.hours}} h.
+        {{date.minutes}} m. {{date.seconds}} s.</div>
+      <div class="auction__tickets-info">
+        <div class="auction__tickets-total">
+          Total tickets amount: <span>{{auction.tickets.length}}</span>
+        </div>
+        <div class="auction__tickets-price">
+          Price per 1 ticket: <span>{{auction.pricePerTicket}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="auction__field" #field>
+      <div class="auction__point" *ngFor="let point of auction.tickets"
+           (click)="onTicketClick(point.ticketNumber)"
+           [ngClass]="{'chosen': chosenTickets.includes(point.ticketNumber)}">
+        <div class="auction__point-circle" [style.background-color]="usersColors.get(point.userId)"
+             [ngClass]="{'engaged': point.userId !== currentUser.id, 'own': point.userId === currentUser.id}">
+        </div>
+      </div>
+    </div>
+    <div class="auction__buy-info">
+      <div class="auction__buy-title">Total price is</div>
+      <div class="auction__buy-title-price">{{chosenTickets.length * auction.pricePerTicket}}</div>
+      <button class="active-button auction__buy-button"
+              (click)="onBuyClick()">
+        Buy
+        <div class="auction__buy-button-amount">{{chosenTickets.length}}</div>
+        tickets
+      </button>
+    </div>
+  </div>
+</div>

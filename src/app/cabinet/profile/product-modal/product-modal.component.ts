@@ -20,8 +20,7 @@ export class ProductModalComponent implements OnInit {
               private userService: UserService,
               private productService: ProductService) {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.pattern(/^[\S\s]{8,16}$/)]],
-      price: ['', [Validators.required, Validators.pattern(/^[\d]{1,16}$/)]],
+      title: ['', [Validators.required, Validators.pattern(/^[\S\s]{8,100}$/)]],
       description: ['', [Validators.required, Validators.pattern(/^[\S\s]{8,1000}$/)]],
       photo: [null],
       userId: [null]

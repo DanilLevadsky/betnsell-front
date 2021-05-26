@@ -45,7 +45,7 @@ export class LandingComponent implements OnInit {
   handleAuth = () => {
     this.isSubmitDisabled = false;
     if (this.auth.isLoggedIn()) {
-      this.router.navigate(['/cabinet']);
+      this.router.navigate(['/app/']);
     } else if (this.auth.tokenOutdated()) {
       this.auth.clearSession();
     }

@@ -1,1 +1,26 @@
 @import "../../../styles/elements.css";
+
+.auction-modal__price-container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.auction-modal__price-title{
+  font-size: 14px;
+}
+
+.auction-modal__price-title:first-child{
+  margin-right: 8px;
+}
+
+.auction-modal__price{
+  font-size: 15px;
+  color: goldenrod;
+  margin-right: 8px;
+}
+
+.auction-modal__total-tickets-item {
+  margin-bottom: 14px !important;
+}

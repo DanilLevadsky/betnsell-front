@@ -1,5 +1,5 @@
 @import "../../assets/fonts/fonts.css";
-@import "../../styles.scss";
+@import "../../styles.css";
 
 
 /* GENERAL STYLES */
@@ -97,7 +97,7 @@ input:hover, input:active, input:focus{
   min-height: initial;
 }
 
-.common-button {
+.common-button, .active-button {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -111,7 +111,21 @@ input:hover, input:active, input:focus{
   cursor: pointer;
 }
 
-.common-button:disabled {
+.active-button {
+  background: yellowgreen;
+  border: 1px solid #485563;
+}
+
+.active-button:hover{
+  background: greenyellow;
+  border: 1px solid black;
+}
+
+.active-button:active{
+  background: darkseagreen;
+}
+
+.common-button:disabled, .active-button:disabled {
   pointer-events: none;
   opacity: .4;
 }

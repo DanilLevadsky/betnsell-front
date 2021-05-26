@@ -34,7 +34,32 @@ const ErrorConstants = {
   INVALID_TOKEN: {
     reason: 'invalidAuthTokenError',
     message: 'Хакер нюхай бебру токен не совпал'
-  }
+  },
+  INVALID_UPDATE_INFO_ERROR: {
+    reason: 'invalidUpdateInfoError',
+    message: 'Не удалось обновить данные'
+  },
+  FORBIDDEN_ACCESS_ERROR: {
+    reason: 'forbiddenAccessError',
+    message: 'Ошибка прав доступа'
+  },
+
+  INVALID_PRODUCT_DATA_ERROR: {
+    reason: 'invalidProductDataError',
+    message: 'Неправильные данные продукта'
+  },
+  INVALID_AUCTION_DATA_ERROR: {
+    reason: 'invalidAuctionDataError',
+    message: 'Неправильные данные аукциона'
+  },
+  AUCTION_NOT_FOUND_ERROR: {
+    reason: 'auctionNotFoundError',
+    message: 'Аукцион не найден'
+  },
+  AUCTION_SUBSCRIPTION_ERROR: {
+    reason: 'auctionSubscriptionError',
+    message: 'Нужно больше золота!'
+  },
 };
 
 export default ErrorConstants;

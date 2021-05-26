@@ -4,7 +4,8 @@
           [nzFooter]="modalFooter"
           [nzTitle]="modalTitle"
           [nzCloseIcon]="empty"
-          nzClassName="common-modal">
+          nzClassName="common-modal"
+          nzCentered>
 </nz-modal>
 
 <ng-template #modalTitle>
@@ -20,25 +21,19 @@
   <form (submit)="createProduct()" [formGroup]="form" class="" nz-form>
     <nz-form-item class="common-modal__item">
       <div class="common-modal__field-title">Title</div>
-      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 32">
-        <label><input placeholder="Min. 8, max. 32" class="common-modal__input" formControlName="title" nz-input type="text"
-        ></label>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item class="common-modal__item">
-      <div class="common-modal__field-title">Price</div>
-      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Только цифры, макс. 32">
-        <label><input type="text" placeholder="Only numbers, max. 32" class="common-modal__input"
-                      formControlName="price" nz-input
-        ></label>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 100">
+        <label><textarea placeholder="Min. 8, max. 32" class="common-modal__input product-modal__title"
+                         formControlName="title" nz-input type="text"
+        ></textarea></label>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="common-modal__item">
       <div class="common-modal__field-title">Description</div>
       <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 1000">
-        <label><input type="text" placeholder="Min. 8, max. 1000" class="common-modal__input"
-                      formControlName="description" nz-input
-        ></label>
+        <label><textarea type="text" placeholder="Min. 8, max. 1000"
+                         class="common-modal__input product-modal__description"
+                         formControlName="description" nz-input
+        ></textarea></label>
       </nz-form-control>
     </nz-form-item>
     <button [disabled]="form.invalid"

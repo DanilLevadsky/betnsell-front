@@ -5,6 +5,7 @@ import {CabinetComponent} from './cabinet.component';
 import {PrivateGuard} from '../../api/guard/PrivateGuard';
 import {MainComponent} from './main/main.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AuctionComponent} from './auction/auction.component';
 
 const AppRoutes: Routes = [
   {
@@ -13,7 +14,7 @@ const AppRoutes: Routes = [
     canActivate: [LandingGuard]
   },
   {
-    path: 'cabinet',
+    path: 'app',
     component: CabinetComponent,
     canActivate: [PrivateGuard],
     children: [
@@ -22,8 +23,12 @@ const AppRoutes: Routes = [
         component: MainComponent,
       },
       {
-        path: 'profile/:id',
+        path: 'cabinet',
         component: ProfileComponent,
+      },
+      {
+        path: 'auction/:id',
+        component: AuctionComponent,
       },
     ]
   },

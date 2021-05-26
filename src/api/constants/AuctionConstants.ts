@@ -1,0 +1,6 @@
+export const AuctionConstants = {
+  MIN_TICKET_PRICE: 1,
+  MAX_TICKET_PRICE: 20,
+  MAX_TICKETS_AMOUNT: 250,
+  MIN_TICKETS_AMOUNT: 5
+};

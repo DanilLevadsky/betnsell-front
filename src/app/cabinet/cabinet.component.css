@@ -1,24 +1,27 @@
 @import "../styles/elements.css";
+@import "../../styles.css";
 
 .cabinet{
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   position: relative;
 }
 
 .cabinet__content{
   width: 100%;
   display: flex;
+  height: calc(100% - 80px);
+  overflow-y: auto;
   flex-direction: column;
   padding: 24px;
   background: linear-gradient(to right, rgb(64, 59, 74), rgb(231, 233, 187));
-  height: calc(100vh - 80px);
 }
 
 .cabinet__header{
   width: 100%;
-  height: 80px;
+  min-height: 80px;
   background: #29323c;
   display: flex;
   align-items: center;

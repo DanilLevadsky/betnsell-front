@@ -1,13 +1,20 @@
 <div class="main">
   <div class="main__list">
-    <div class="main__product" *ngFor="let product of products">
-      <div class="main__product-title">{{product.title}}</div>
-      <img alt="photo" [src]="product.photo || ImageConstants.DEFAULT_AVATAR" class="main__product-photo">
-      <div class="main__description">Описание - {{product.description || 'Отсутсвует'}}</div>
-      <div class="main__price">Цена - {{product.price}}</div>
+    <div class="main__auction-container" *ngFor="let auction of auctions">
+      <app-auction-short [auction]="auction" class="main__product" *ngIf="auction else placeholder"></app-auction-short>
     </div>
   </div>
+  <nz-pagination (nzPageIndexChange)="onPageChanged($event)"
+                 [nzHideOnSinglePage]="true"
+                 [nzPageIndex]="currentAuctionsPage"
+                 [nzPageSize]="1"
+                 [nzResponsive]="true"
+                 [nzTotal]="totalAuctionsPages"
+                 class="pagination"></nz-pagination>
 </div>
 
-
-
+<ng-template #placeholder>
+  <div class="main__product-placeholder">
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+  </div>
+</ng-template>

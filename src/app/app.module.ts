@@ -36,6 +36,14 @@ import { ProductModalComponent } from './cabinet/profile/product-modal/product-m
 import { AuctionModalComponent } from './cabinet/profile/auction-modal/auction-modal.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ProductShortComponent } from './cabinet/profile/product-short/product-short.component';
+import { AuctionShortComponent } from './cabinet/auction-short/auction-short.component';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { ProductEditModalComponent } from './cabinet/profile/product-short/product-edit-modal/product-edit-modal.component';
+import {NzSpinModule} from 'ng-zorro-antd/spin';
+import {NzPaginationModule} from 'ng-zorro-antd/pagination';
+import { AuctionComponent } from './cabinet/auction/auction.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 registerLocaleData(en);
 
@@ -53,7 +61,11 @@ export function initApp(configService: ConfigService): any {
     LoginModalComponent,
     ProfileComponent,
     ProductModalComponent,
-    AuctionModalComponent
+    AuctionModalComponent,
+    ProductShortComponent,
+    AuctionShortComponent,
+    ProductEditModalComponent,
+    AuctionComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +80,11 @@ export function initApp(configService: ConfigService): any {
     NzIconModule,
     ReactiveFormsModule,
     NzDatePickerModule,
-    NzSelectModule
+    NzSelectModule,
+    NzSkeletonModule,
+    NzSpinModule,
+    NzPaginationModule,
+    NgxSpinnerModule
   ],
   providers: [
     LandingGuard,

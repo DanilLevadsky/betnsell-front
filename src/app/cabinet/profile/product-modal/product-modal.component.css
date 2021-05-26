@@ -1,1 +1,11 @@
 @import "../../../styles/elements.css";
+
+.product-modal__title{
+  height: 86px !important;
+  padding-top: 12px;
+}
+
+.product-modal__description{
+  height: 200px !important;
+  padding-top: 12px;
+}

@@ -4,7 +4,8 @@
           [nzFooter]="modalFooter"
           [nzTitle]="modalTitle"
           [nzCloseIcon]="empty"
-          nzClassName="common-modal">
+          nzClassName="common-modal"
+          nzCentered>
 </nz-modal>
 
 <ng-template #modalTitle>
@@ -19,19 +20,38 @@
   <div class="common-modal__sub-header">Please, fill in the fields above</div>
   <form (submit)="createAuction()" [formGroup]="form" class="" nz-form>
     <nz-form-item class="common-modal__item">
-      <div class="common-modal__field-title">Select auction finish date</div>
-      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Choose date">
-        <nz-date-picker formControlName="lotFinishDate"></nz-date-picker>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item class="common-modal__item">
       <div class="common-modal__field-title">Product</div>
       <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Только цифры, макс. 32">
-        <nz-select formControlName="productId">
-          <nz-option *ngFor="let option of user.products" [nzValue]="option.id" [nzLabel]="option.title"></nz-option>
+        <nz-select formControlName="productId" (nzScrollToBottom)="updateProducts()" [nzDropdownRender]="renderTemplate">
+          <nz-option *ngFor="let option of products" [nzValue]="option.id" [nzLabel]="option.title"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Select auction price per one ticket</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback
+                       [nzErrorTip]="'Max. ' + auctionConstants.MAX_TICKET_PRICE +  ', min. ' +
+                       auctionConstants.MIN_TICKET_PRICE">
+        <label><input placeholder="Price per ticket" class="common-modal__input product-modal__title"
+                      formControlName="pricePerTicket" nz-input type="text"
+        ></label>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="common-modal__item auction-modal__total-tickets-item">
+      <div class="common-modal__field-title">Select auction total tickets amount</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback
+                       [nzErrorTip]="'Max. ' + auctionConstants.MAX_TICKETS_AMOUNT +  ', min. ' +
+                       auctionConstants.MIN_TICKETS_AMOUNT">
+        <label><input placeholder="Price per ticket" class="common-modal__input product-modal__title"
+                      formControlName="totalTickets" nz-input type="text"
+        ></label>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="auction-modal__price-container">
+      <div class="auction-modal__price-title">So, there we have the</div>
+      <div class="auction-modal__price">{{currentPrice}}</div>
+      <div class="auction-modal__price-title">product`s price</div>
+    </div>
     <button [disabled]="form.invalid"
             class="common-button common-modal__submit" type="submit">Create
     </button>
@@ -40,4 +60,5 @@
 
 <ng-template #modalFooter></ng-template>
 <ng-template #empty></ng-template>
+<ng-template #renderTemplate><nz-spin *ngIf="isProductsLoading"></nz-spin></ng-template>
 

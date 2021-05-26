@@ -1,0 +1,25 @@
+<div class="profile__auction auction-item" *ngIf="auction else placeholder" (click)="onAuctionClick()">
+  <div class="auction-item__content">
+    <div class="auction-item__photo-container">
+      <img alt="photo" class="auction-item__photo" [src]="imageConstants.NO_PHOTO">
+    </div>
+    <div class="auction-item__price">
+      <div class="auction-item__price-amount">{{auction.totalPrice}}</div>
+      <img alt="gold" class="auction-item__gold" src="assets/img/gold.svg">
+    </div>
+    <div class="auction-item__info">
+
+      <div class="auction-item__info__title">{{auction.product.title}}</div>
+      <div class="auction-item__info__description">{{auction.product.description}}</div>
+    </div>
+  </div>
+  <div class="auction-item__bottom">
+    <div class="auction-item__finish" *ngIf="finishDate as date">Will end in {{date.days}} d. {{date.hours}} h.
+      {{date.minutes}} m. {{date.seconds}} s.
+    </div>
+  </div>
+</div>
+
+<ng-template #placeholder>
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+</ng-template>

@@ -1,0 +1,32 @@
+<div class="product-item" *ngIf="product else placeholder">
+  <div class="product-item__info">
+    <div class="product-item__close" (click)="deleteProduct(product.id)">
+      <img alt="delete" class="product-item__delete-icon" src="assets/img/close.svg">
+    </div>
+    <div class="product-item__edit" (click)="onOpenEditModal()">
+      <img alt="delete" class="product-item__edit-icon" src="assets/img/edit.svg">
+    </div>
+    <img alt="photo" [src]="product.photo || imageConstants.NO_PHOTO" class="product-item__info-photo">
+    <div class="product-item__title">
+      <div class="product-item__name">{{product.title}}</div>
+    </div>
+  </div>
+  <div class="product-item__info-description">{{product.description}}</div>
+  <div class="product-item__create active-button" (click)="onCreateAuctionClick()">
+    <div *ngIf="product.auction else createAuction">Go to the auction</div>
+  </div>
+</div>
+
+<ng-template #placeholder>
+  <div class="product-item__placeholder">
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+  </div>
+</ng-template>
+
+<app-product-edit-modal [product]="product"
+                        [onCancel]="onCloseEditModal"
+                        [onSuccess]="onSuccessEditModal"
+                        [isActive]="isEditModalOpened"></app-product-edit-modal>
+<ng-template #createAuction>
+  <div>Create new auction</div>
+</ng-template>

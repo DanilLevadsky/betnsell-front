@@ -1,11 +1,11 @@
 export class AuctionCreateRequest {
-  lotFinishDate: string;
-  lotExpireDate: string;
+  pricePerTicket: number;
+  totalTickets: number;
   productId: number;
 
-  constructor(lotFinishDate: string, lotExpireDate: string, productId: number) {
-    this.lotExpireDate = lotExpireDate;
-    this.lotFinishDate = lotFinishDate;
+  constructor(pricePerTicket: number, totalTickets: number, productId: number) {
+    this.totalTickets = totalTickets;
+    this.pricePerTicket = pricePerTicket;
     this.productId = productId;
   }
 }

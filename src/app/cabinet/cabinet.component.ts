@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../api/service/auth.service';
 import {BaseService} from '../../api/service/base.service';
 import {UserService} from '../../api/service/user.service';
@@ -11,13 +11,14 @@ import {Product} from '../../api/model/product/Product';
 import {ImageConstants} from '../../api/constants/ImageConstants';
 import {Router} from '@angular/router';
 import {AuctionsService} from '../../api/service/auctions.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-cabinet',
   templateUrl: './cabinet.component.html',
   styleUrls: ['./cabinet.component.css']
 })
-export class CabinetComponent implements OnInit, OnDestroy {
+export class CabinetComponent implements OnInit, OnDestroy, AfterViewInit {
 
   user: UserResponse;
   subscriptions: Array<Subscription> = [];
@@ -29,7 +30,8 @@ export class CabinetComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private productService: ProductService,
               private auctionService: AuctionsService,
-              private router: Router) {
+              private router: Router,
+              private spinner: NgxSpinnerService) {
   }
 
   get ImageConstants(): typeof ImageConstants {
@@ -40,11 +42,15 @@ export class CabinetComponent implements OnInit, OnDestroy {
     this.initCabinet();
   }
 
+  ngAfterViewInit(): void {
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   initCabinet(): void {
+    this.spinner.show();
     this.userService.getUser()
       .pipe(
         catchError(err => {
@@ -53,14 +59,13 @@ export class CabinetComponent implements OnInit, OnDestroy {
         })
       ).subscribe(userResponse => {
       this.userService.setUser(userResponse);
-      this.productService.setProducts(userResponse.products);
-      this.auctionService.setAuctions(userResponse.auctions);
       this.initSubscriptions();
       this.cabinetInited = true;
+      this.spinner.hide();
     });
   }
 
-  initSubscriptions(): void {
+   initSubscriptions(): void {
     this.subscriptions.push(this.userService.userProfile.subscribe(user => this.user = user));
   }
 
@@ -69,7 +74,7 @@ export class CabinetComponent implements OnInit, OnDestroy {
   }
 
   onProfileClick(): void {
-    this.router.navigate(['/cabinet/profile', this.userService.userProfile.getValue().id]);
+    this.router.navigate(['/app/cabinet']);
   }
 
 }

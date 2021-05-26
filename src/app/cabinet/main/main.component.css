@@ -1,5 +1,37 @@
 @import "../../styles/elements.css";
 
 .main{
+  flex-direction: column;
+}
 
+.main{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.main__list{
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main__auction-container {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.main__auction-container:last-child {
+  margin-left: 0;
+}
+
+.main__auction-container:nth-child(3n + 2), .main__auction-container:nth-child(2) {
+  margin: 0 16px;
+}
+
+.main__product-placeholder{
+  width: 100%;
 }

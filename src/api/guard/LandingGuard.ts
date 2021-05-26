@@ -16,7 +16,7 @@ export class LandingGuard implements CanActivate {
     if (this.auth.isLoggedOut()) {
       return true;
     } else {
-      this.router.navigate(['/cabinet']);
+      this.router.navigate(['/app/']);
       return false;
     }
 

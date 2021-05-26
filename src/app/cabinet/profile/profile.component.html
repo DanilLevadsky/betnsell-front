@@ -1,4 +1,8 @@
 <div class="profile">
+  <div class="go-back" (click)="onBackClick()">
+    <img alt="back" src="assets/img/back_white.svg" class="modal__go-back-img">
+    <div class="modal__go-back">Go back</div>
+  </div>
   <div class="profile__container">
     <div class="profile__forms">
       <div class="profile__form-section">
@@ -60,41 +64,52 @@
         </form>
       </div>
     </div>
-    <div class="profile__types">
-      <div class="profile__type" (click)="onTypeClick(profileListType.PRODUCTS)"
-           [class.profile__type_active]="chosenType === profileListType.PRODUCTS">Products
+    <div class="profile__options">
+      <div class="profile__types">
+        <div class="profile__type" (click)="onTypeClick(profileListType.PRODUCTS)"
+             [class.profile__type_active]="chosenType === profileListType.PRODUCTS">Products
+        </div>
+        <div class="profile__type" (click)="onTypeClick(profileListType.AUCTIONS)"
+             [class.profile__type_active]="chosenType === profileListType.AUCTIONS">Auctions
+        </div>
       </div>
-      <div class="profile__type" (click)="onTypeClick(profileListType.AUCTIONS)"
-           [class.profile__type_active]="chosenType === profileListType.AUCTIONS">Auctions
+      <div class="profile__create-button active-button" (click)="onCreateClick()">
+        <img alt="add" class="profile__create-button-img" src="assets/img/add-plus.svg">
+        <div class="profile__create-button-text">Create</div>
       </div>
     </div>
     <div class="profile__list-container" *ngIf="chosenType === profileListType.PRODUCTS">
-      <div *ngIf="user.products.length > 0 else noProducts" class="profile__list profile__list_products">
-        <div class="profile__product product-item" *ngFor="let item of user.products">
-          <div class="product-item__title">
-            <div class="product-item__name">{{item.title}}</div>
-            <div class="product-item__price">{{item.price}}</div>
-            <div class="product-item__close" (click)="deleteProduct(item.id)">delete</div>
-          </div>
-          <img alt="photo" [src]="item.photo || imageConstants.NO_PHOTO" class="product-item__info-photo">
-          <div class="product-item__info-description">{{item.description}}</div>
+      <div *ngIf="userProducts.length > 0 else noProducts" class="profile__list profile__list_products">
+        <div class="profile__product-container" *ngFor="let item of userProducts">
+          <app-product *ngIf="item else placeholder"
+                       [product]="item"
+                       [onDelete]="deleteProduct"
+                       [onEdit]="updateProduct"
+                       [onAuctionCreate]="openAuctionModalWithProduct"></app-product>
         </div>
       </div>
+      <nz-pagination (nzPageIndexChange)="updateUserProducts($event)"
+                     [nzHideOnSinglePage]="true"
+                     [nzPageIndex]="currentProductsPage"
+                     [nzPageSize]="1"
+                     [nzResponsive]="true"
+                     [nzTotal]="totalProductsPages"
+                     class="pagination"></nz-pagination>
     </div>
     <div class="profile__list-container" *ngIf="chosenType === profileListType.AUCTIONS">
-      <div *ngIf="user.auctions.length > 0 else noAuctions" class="profile__list profile__list_auctions">
-        <div class="profile__auction auction-item" *ngFor="let item of user.auctions">
-          <div class="auction-item__title">
-            <div class="auction-item__title-header">
-              <div class="auction-item__id">{{item.id}}</div>
-              <div class="auction-item__status">{{item.status}}</div>
-            </div>
-            <div class="auction-item__title-info">
-              <div class="auction-item__product">{{item.productId}}</div>
-            </div>
-          </div>
+      <div *ngIf="userAuctions.length > 0 else noAuctions" class="profile__list profile__list_auctions">
+        <div class="profile__auction-container" *ngFor="let item of userAuctions">
+          <app-auction-short *ngIf="item else placeholder"
+                             [auction]="item"></app-auction-short>
         </div>
       </div>
+      <nz-pagination (nzPageIndexChange)="updateUserAuctions($event)"
+                     [nzHideOnSinglePage]="true"
+                     [nzPageIndex]="currentAuctionsPage"
+                     [nzPageSize]="1"
+                     [nzResponsive]="true"
+                     [nzTotal]="totalAuctionsPages"
+                     class="pagination"></nz-pagination>
     </div>
   </div>
 </div>
@@ -121,4 +136,11 @@
 
 <app-auction-modal [onSuccess]="successAuctionCreation"
                    [onCancel]="closeAuctionModal"
-                   [isActive]="isAuctionModalOpened"></app-auction-modal>
+                   [isActive]="isAuctionModalOpened"
+                   [product]="productForAuctionModal"></app-auction-modal>
+
+<ng-template #placeholder>
+  <div class="placeholder">
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+  </div>
+</ng-template>

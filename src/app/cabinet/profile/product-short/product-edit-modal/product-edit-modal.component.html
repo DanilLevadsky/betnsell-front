@@ -1,0 +1,47 @@
+<nz-modal (nzOnCancel)="onCancel()"
+          [(nzVisible)]="isActive"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          [nzTitle]="modalTitle"
+          [nzCloseIcon]="empty"
+          nzClassName="common-modal"
+          nzCentered>
+</nz-modal>
+
+<ng-template #modalTitle>
+  <div class="go-back" (click)="onBackClick()">
+    <img alt="back" src="assets/img/back.svg" class="modal__go-back-img">
+    <div class="modal__go-back">Go back</div>
+  </div>
+</ng-template>
+
+<ng-template #modalContent>
+  <div class="common-modal__header">Add your new product</div>
+  <div class="common-modal__sub-header">Please, fill in the fields above</div>
+  <form (submit)="onSaveButtonClick()" [formGroup]="form" class="" nz-form>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Title</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 100">
+        <label><textarea placeholder="Min. 8, max. 32" class="common-modal__input product-modal__title"
+                         formControlName="title" nz-input type="text"
+        ></textarea></label>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Description</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback nzErrorTip="Мин. 8, макс. 1000">
+        <label><textarea type="text" placeholder="Min. 8, max. 1000"
+                         class="common-modal__input product-modal__description"
+                         formControlName="description" nz-input
+        ></textarea></label>
+      </nz-form-control>
+    </nz-form-item>
+    <button [disabled]="form.invalid || !isDescriptionChanged || !isTitleChanged"
+            class="common-button common-modal__submit" type="submit">Create
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #modalFooter></ng-template>
+<ng-template #empty></ng-template>
+
