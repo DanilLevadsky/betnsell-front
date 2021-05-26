@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Run production build
-        run: ng build --prod
+        run: npm run build:prod
 
       - name: Deploy to AWS S3 Bucket
         env:
