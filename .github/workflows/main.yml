@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Run production build
-        run: npm run build:prod
+        run: npm run build-prod
 
       - name: Deploy to AWS S3 Bucket
         env:
@@ -33,4 +33,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region eu-west-1 \
-            dist/betnsell-front s3://betnsell.tech
+            dist/node-project-front-end s3://betnsell.tech
