@@ -3,6 +3,7 @@ import {Product} from '../../../../api/model/product/Product';
 import {ProductService} from '../../../../api/service/product.service';
 import {NzNotificationService} from 'ng-zorro-antd/notification';
 import {ImageConstants} from '../../../../api/constants/ImageConstants';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +19,8 @@ export class ProductShortComponent implements OnInit {
   isEditModalOpened: boolean = false;
 
   constructor(private productService: ProductService,
-              private notifications: NzNotificationService) {
+              private notifications: NzNotificationService,
+              private router: Router) {
   }
 
   get imageConstants(): typeof ImageConstants {
@@ -46,10 +48,14 @@ export class ProductShortComponent implements OnInit {
 
   onOpenEditModal = () => {
     this.isEditModalOpened = true;
-  }
+  };
 
   onCreateAuctionClick(): void {
-    this.onAuctionCreate(this.product);
+    if (this.product.auction) {
+      this.router.navigate([`/app/auction`, this.product.auction.id]);
+    } else {
+      this.onAuctionCreate(this.product);
+    }
   }
 
 }

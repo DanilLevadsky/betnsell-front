@@ -13,6 +13,8 @@ import {TimeLeft} from '../../../api/model/time/TimeLeft';
 import TimeUtil from '../../../api/utils/TimeUtil';
 import {NgxSpinner} from 'ngx-spinner/lib/ngx-spinner.enum';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {Ticket} from '../../../api/model/auction/Ticket';
+import {TicketsService} from '../../../api/service/ticketsService';
 
 @Component({
   selector: 'app-auction',
@@ -35,7 +37,8 @@ export class AuctionComponent implements OnInit, OnDestroy {
               private auctionService: AuctionsService,
               private userService: UserService,
               private notificationService: NzNotificationService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private ticketsService: TicketsService) {
   }
 
   get imageConstants(): typeof ImageConstants {
@@ -61,6 +64,8 @@ export class AuctionComponent implements OnInit, OnDestroy {
   initAuction(): void {
     this.auctionService.getAuction(this.params.id).subscribe(auction => {
       this.auction = auction;
+      this.auction.tickets = this.auction.tickets.sort((a, b) => {return a.ticketNumber - b.ticketNumber});
+      console.log(this.auction.tickets);
       this.initUsersColors();
       clearInterval(this.dateInterval);
       this.updateFinishDate();
@@ -69,31 +74,30 @@ export class AuctionComponent implements OnInit, OnDestroy {
   }
 
   initUsersColors(): void {
-    let usersArray: Array<number> = [];
-    this.auction.tickets.forEach(ticket => {
-      if (!usersArray.includes(ticket.userId)) {
-        usersArray.push(ticket.userId);
+    this.usersColors.set(this.currentUser.id, ColorConstants.userColor);
+    this.auction.users.forEach((user, index) => {
+      if (user !== this.currentUser.id) {
+        this.usersColors.set(user, ColorConstants.colors[index]);
       }
-    });
-    usersArray.forEach((user, index) => {
-      this.usersColors.set(user, ColorConstants[index]);
     });
   }
 
-  onTicketClick(ticketId: number): void {
-    if (this.chosenTickets.includes(ticketId)) {
-      this.chosenTickets = this.chosenTickets.filter(item => item !== ticketId);
-    } else {
-      this.chosenTickets.push(ticketId);
+  onTicketClick(ticket: Ticket): void {
+    if (!ticket.userId) {
+      if (this.chosenTickets.includes(ticket.ticketNumber)) {
+        this.chosenTickets = this.chosenTickets.filter(item => item !== ticket.ticketNumber);
+      } else {
+        this.chosenTickets.push(ticket.ticketNumber);
+      }
     }
   }
 
   onBuyClick(): void {
-    this.auctionService.purchaseTickets(new TicketsPurchaseRequest(this.auction.id, this.chosenTickets)).subscribe(response => {
+    this.ticketsService.purchaseTickets(new TicketsPurchaseRequest(this.auction.id, this.chosenTickets)).subscribe(response => {
       this.initAuction();
       this.chosenTickets = [];
       this.notificationService.success('Успех!', 'Вы удачно купили билеты');
-    })
+    });
   }
 
   updateFinishDate = (): void => {

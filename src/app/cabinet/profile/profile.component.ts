@@ -54,7 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private auctionService: AuctionsService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private notifications: NzNotificationService) {
   }
 
   get profileListType(): typeof ProfileListType {
@@ -85,13 +86,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   successProductCreation = () => {
     this.initProducts();
     this.closeProductModal();
-    // this.notifications.success('Успех!', 'Вы успешно создали новый товар');
+    this.notifications.success('Успех!', 'Вы успешно создали новый товар');
   };
 
   successAuctionCreation = (auction: Auction) => {
     this.initAuctions();
     this.closeAuctionModal();
-    // this.notifications.success('Успех!', 'Вы успешно создали новый аукцион');
+    this.notifications.success('Успех!', 'Вы успешно создали новый аукцион');
   };
 
   initForms(): void {
@@ -173,7 +174,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserEmail(request).subscribe(() => {
       this.userService.changeEmail(request);
       this.disableEmailChange = true;
-      // this.notifications.success('Успех!', 'Вы удачно сменили почту');
+      this.notifications.success('Успех!', 'Вы удачно сменили почту');
     });
   }
 
@@ -182,7 +183,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserUsername(request).subscribe(() => {
       this.userService.changeNickname(request);
       this.disableUsernameChange = true;
-      // this.notifications.success('Успех!', 'Вы удачно сменили юзернейм');
+      this.notifications.success('Успех!', 'Вы удачно сменили юзернейм');
     });
   }
 
@@ -191,7 +192,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserMobile(request).subscribe(() => {
       this.userService.changeMobile(request);
       this.disableMobileChange = true;
-      // this.notifications.success('Успех!', 'Вы удачно сменили телефон');
+      this.notifications.success('Успех!', 'Вы удачно сменили телефон');
     });
   }
 
@@ -200,7 +201,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.userService.updateUserName(request).subscribe(() => {
       this.userService.changeName(request);
       this.disableNameChange = true;
-      // this.notifications.success('Успех!', 'Вы удачно сменили имя');
+      this.notifications.success('Успех!', 'Вы удачно сменили имя');
     });
   }
 

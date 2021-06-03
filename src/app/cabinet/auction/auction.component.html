@@ -7,7 +7,8 @@
       <div class="auction__product-title">{{auction.product.title}}</div>
       <div class="auction__product-description">{{auction.product.description}}</div>
       <div class="auction__time" *ngIf="finishDate as date">Auction will end in {{date.days}} d. {{date.hours}} h.
-        {{date.minutes}} m. {{date.seconds}} s.</div>
+        {{date.minutes}} m. {{date.seconds}} s.
+      </div>
       <div class="auction__tickets-info">
         <div class="auction__tickets-total">
           Total tickets amount: <span>{{auction.tickets.length}}</span>
@@ -17,13 +18,23 @@
         </div>
       </div>
     </div>
-    <div class="auction__field" #field>
+    <div class="auction__field">
       <div class="auction__point" *ngFor="let point of auction.tickets"
-           (click)="onTicketClick(point.ticketNumber)"
-           [ngClass]="{'chosen': chosenTickets.includes(point.ticketNumber)}">
+           (click)="onTicketClick(point)"
+           [ngClass]="{'chosen': chosenTickets.includes(point.ticketNumber)}"
+           nz-popover
+           nzPopoverTrigger="hover"
+           [nzPopoverContent]="contentTemplate">
         <div class="auction__point-circle" [style.background-color]="usersColors.get(point.userId)"
              [ngClass]="{'engaged': point.userId !== currentUser.id, 'own': point.userId === currentUser.id}">
         </div>
+        <ng-template #contentTemplate>
+          <div *ngIf="point.userId">
+            <div class *ngIf="point.userId === currentUser.id">Your point</div>
+            <div class *ngIf="point.userId != currentUser.id">User`s id: {{point.userId}}</div>
+          </div>
+          <div *ngIf="!point.userId">Point not reserved</div>
+        </ng-template>
       </div>
     </div>
     <div class="auction__buy-info">

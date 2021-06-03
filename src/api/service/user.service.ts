@@ -15,6 +15,7 @@ import {PaginationResponse} from '../response/pagination/PaginationResponse';
 import {Auction} from '../model/auction/Auction';
 import {BaseService} from './base.service';
 import {Product} from '../model/product/Product';
+import {BalanceRequest} from '../request/user/BalanceRequest';
 
 @Injectable()
 export class UserService {
@@ -26,7 +27,7 @@ export class UserService {
   constructor(private config: ConfigService,
               private httpClient: HttpClient,
               private baseService: BaseService) {
-    this.apiUrl = `http://127.0.0.1:3000/users`;
+    this.apiUrl = `http://52.58.171.243:3000/users`;
     // setTimeout(() => {
     //
     // }, 2000);
@@ -80,6 +81,10 @@ export class UserService {
     this.setUser(Object.assign(this.userProfile.getValue(), mobile));
   }
 
+  changeBalance(newBalance): void {
+    this.setUser(Object.assign(this.userProfile.getValue(), {balance: newBalance}));
+  }
+
   getUserProducts(userId: number, page: number = 1, perPage: number = 2): Observable<PaginationResponse<Array<Product>>> {
     return this.httpClient.get<PaginationResponse<Array<Product>>>(`${this.apiUrl}/${userId}/products`,
       {params: this.baseService.getPaginationParams(page, perPage)});
@@ -88,5 +93,9 @@ export class UserService {
   getUserAuctions(userId: number, page: number = 1, perPage: number = 4): Observable<PaginationResponse<Array<Auction>>> {
     return this.httpClient.get<PaginationResponse<Array<Auction>>>(`${this.apiUrl}/${userId}/auctions`,
       {params: this.baseService.getPaginationParams(page, perPage)});
+  }
+
+  updateBalance(request: BalanceRequest): Observable<any> {
+    return this.httpClient.patch<any>(`${this.apiUrl}/update/balance`, request);
   }
 }

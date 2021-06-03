@@ -6,8 +6,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {AuctionCreateRequest} from '../request/auction/AuctionCreateRequest';
 import {PaginationResponse} from '../response/pagination/PaginationResponse';
 import {BaseService} from './base.service';
-import {TicketsPurchaseRequest} from '../request/auction/TicketsPurchaseRequest';
-import {TicketsPurchaseResponse} from '../response/auctions/TicketsPurchaseResponse';
 
 @Injectable()
 
@@ -20,7 +18,7 @@ export class AuctionsService {
   constructor(private config: ConfigService,
               private httpClient: HttpClient,
               private baseService: BaseService) {
-    this.apiUrl = 'http://127.0.0.1:3000/auctions';
+    this.apiUrl = 'http://52.58.171.243:3000/auctions';
   }
 
   // setAuctions(auctions: Array<Auction>): void {
@@ -45,10 +43,4 @@ export class AuctionsService {
   getAuction(id: number): Observable<Auction> {
     return this.httpClient.get<Auction>(`${this.apiUrl}/${id}`);
   }
-
-  purchaseTickets(request: TicketsPurchaseRequest): Observable<TicketsPurchaseResponse> {
-    return this.httpClient.post<TicketsPurchaseResponse>(`http://127.0.0.1:3000/tickets/`, request);
-  }
-
-
 }

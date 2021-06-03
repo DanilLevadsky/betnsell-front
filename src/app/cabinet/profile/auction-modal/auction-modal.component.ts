@@ -68,7 +68,6 @@ export class AuctionModalComponent implements OnInit, OnDestroy, OnChanges {
           this.products.push(this.product);
         }
         this.form.controls.productId.setValue(this.product.id);
-        // this.form.controls.productId.disable();
       } else {
         this.form.reset();
         this.form.controls.productId.enable();

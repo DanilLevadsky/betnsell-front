@@ -16,7 +16,7 @@
 </ng-template>
 
 <ng-template #modalContent>
-  <div class="common-modal__header">Add your new product</div>
+  <div class="common-modal__header">Change your product</div>
   <div class="common-modal__sub-header">Please, fill in the fields above</div>
   <form (submit)="onSaveButtonClick()" [formGroup]="form" class="" nz-form>
     <nz-form-item class="common-modal__item">
@@ -36,8 +36,8 @@
         ></textarea></label>
       </nz-form-control>
     </nz-form-item>
-    <button [disabled]="form.invalid || !isDescriptionChanged || !isTitleChanged"
-            class="common-button common-modal__submit" type="submit">Create
+    <button [disabled]="form.invalid || (!isDescriptionChanged && !isTitleChanged)"
+            class="common-button common-modal__submit" type="submit">Change
     </button>
   </form>
 </ng-template>

@@ -6,9 +6,10 @@
         <img alt="avatar" class="cabinet__avatar" [src]="user.profilePic || ImageConstants.DEFAULT_AVATAR">
         <div class="cabinet__nickname">{{user.username}}</div>
       </div>
-      <div class="cabinet__balance">
+      <div class="cabinet__balance" (click)="onAddBalanceClick()">
         <div class="cabinet__balance-amount">balance - {{user.balance}}</div>
         <img alt="gold" src="assets/img/gold.svg" class="cabinet__gold">
+        <img alt="add" src="assets/img/coin_plus.svg" class="refill-balance">
       </div>
     </div>
   </header>
@@ -18,3 +19,7 @@
 </div>
 
 <ngx-spinner></ngx-spinner>
+
+<app-balance-modal [isActive]="isBalanceModalOpened"
+                   [cancel]="onAddBalanceCancel"
+                   [success]="onAddBalanceSuccess"></app-balance-modal>

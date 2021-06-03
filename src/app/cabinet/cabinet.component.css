@@ -1,7 +1,7 @@
 @import "../styles/elements.css";
 @import "../../styles.css";
 
-.cabinet{
+.cabinet {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.cabinet__content{
+.cabinet__content {
   width: 100%;
   display: flex;
   height: calc(100% - 80px);
@@ -19,7 +19,7 @@
   background: linear-gradient(to right, rgb(64, 59, 74), rgb(231, 233, 187));
 }
 
-.cabinet__header{
+.cabinet__header {
   width: 100%;
   min-height: 80px;
   background: #29323c;
@@ -30,7 +30,7 @@
   overflow: hidden;
 }
 
-.cabinet__exit{
+.cabinet__exit {
   color: white;
   font-size: 18px;
   line-height: 24px;
@@ -40,52 +40,63 @@
   transition: all .3s ease-in-out;
 }
 
-.cabinet__user-info{
+.cabinet__user-info {
   display: flex;
   height: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-.cabinet__avatar{
+.cabinet__avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   margin-right: 12px;
 }
 
-.cabinet__nickname{
+.cabinet__nickname {
   font-size: 18px;
   line-height: 26px;
   color: white;
 }
 
-.cabinet__user-content{
+.cabinet__user-content {
   display: flex;
   margin-right: 32px;
   background: none;
   transition: all .3s ease-in-out;
 }
 
-.cabinet__user-content:hover, .cabinet__exit:hover{
+.cabinet__user-content:hover, .cabinet__exit:hover {
   cursor: pointer;
   color: lightgoldenrodyellow;
   background: rgba(221, 232, 152, 0.2);
   box-shadow: 0 0 45px 60px rgba(221, 232, 152, 0.2);
 }
 
-.cabinet__balance{
+.cabinet__balance {
   color: goldenrod;
   font-size: 20px;
   line-height: 32px;
   display: flex;
 }
 
-.cabinet__balance-amount{
+.cabinet__balance-amount {
   margin-right: 8px;
 }
 
-.cabinet__gold{
+.cabinet__gold {
   width: 28px;
   height: 28px;
+}
+
+.refill-balance {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.cabinet__user-content, .cabinet__balance{
+  align-items: center;
 }

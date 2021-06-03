@@ -1,64 +1,64 @@
 const ErrorConstants = {
-  DEFAULT_ERROR: {
-    reason: 'unknownError',
-    message: 'Произошла неизвестная ошибка. Попробуйте повторить позже.'
-  },
-  SERVER_NOT_RESPONDING: {
-    reason: 'serverNotResponding',
-    message: 'Сервер не отвечает. Подождите или обратитесь в тех. поддежку.'
-  },
   INCORRECT_CREDENTIALS: {
-    reason: 'userValidation',
+    type: 'userValidation',
     message: 'Вы ввели неверный логин или пароль.'
   },
   USER_ALREADY_EXISTS: {
-    reason: 'userAlreadyExistsError',
+    type: 'userAlreadyExistsError',
     message: 'Данный пользователь уже существует'
   },
   WRONG_PASSWORD_OR_LOGIN_ERROR: {
-    reason: 'wrongPasswordOrLoginError',
+    type: 'wrongPasswordOrLoginError',
     message: 'Неправильные логин или пароль'
   },
   USER_NOT_FOUND: {
-    reason: 'userNotFoundError',
+    type: 'userNotFoundError',
     message: 'Пользователь не найден'
   },
   PRODUCT_NOT_FOUND: {
-    reason: 'productNotFoundError',
+    type: 'productNotFoundError',
     message: 'Продукт не найден'
   },
   UNAUTHORIZED_ERROR: {
-    reason: 'unauthorizedError',
+    type: 'unauthorizedError',
     message: 'Вы не аутентифицированы'
   },
   INVALID_TOKEN: {
-    reason: 'invalidAuthTokenError',
+    type: 'invalidAuthTokenError',
     message: 'Хакер нюхай бебру токен не совпал'
   },
   INVALID_UPDATE_INFO_ERROR: {
-    reason: 'invalidUpdateInfoError',
+    type: 'invalidUpdateInfoError',
     message: 'Не удалось обновить данные'
   },
   FORBIDDEN_ACCESS_ERROR: {
-    reason: 'forbiddenAccessError',
+    type: 'forbiddenAccessError',
     message: 'Ошибка прав доступа'
   },
 
   INVALID_PRODUCT_DATA_ERROR: {
-    reason: 'invalidProductDataError',
+    type: 'invalidProductDataError',
     message: 'Неправильные данные продукта'
   },
   INVALID_AUCTION_DATA_ERROR: {
-    reason: 'invalidAuctionDataError',
+    type: 'invalidAuctionDataError',
     message: 'Неправильные данные аукциона'
   },
   AUCTION_NOT_FOUND_ERROR: {
-    reason: 'auctionNotFoundError',
+    type: 'auctionNotFoundError',
     message: 'Аукцион не найден'
   },
   AUCTION_SUBSCRIPTION_ERROR: {
-    reason: 'auctionSubscriptionError',
+    type: 'auctionSubscriptionError',
     message: 'Нужно больше золота!'
+  },
+  DEFAULT_ERROR: {
+    type: 'unknownError',
+    message: 'Произошла неизвестная ошибка. Попробуйте повторить позже.'
+  },
+  SERVER_NOT_RESPONDING: {
+    type: 'serverNotResponding',
+    message: 'Сервер не отвечает. Подождите или обратитесь в тех. поддежку.'
   },
 };
 

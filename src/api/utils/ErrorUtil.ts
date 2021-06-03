@@ -2,9 +2,10 @@ import ErrorConstants from '../constants/ErrorConstants';
 
 const ErrorUtil = {
   getErrorMessage: (err) => {
-    const reason = err.error ? err.error.reason : null;
+    console.log(err);
+    const reason = err.error ? err.error.type : null;
     for (const error of Object.keys(ErrorConstants)) {
-      if (reason === ErrorConstants[error].reason) {
+      if (reason === ErrorConstants[error].type) {
         return ErrorConstants[error].message;
       }
     }

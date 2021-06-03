@@ -19,7 +19,7 @@ export class ProductService {
 
   constructor(private config: ConfigService,
               private httpClient: HttpClient) {
-    this.apiUrl = `http://127.0.0.1:3000/products`;
+    this.apiUrl = `http://52.58.171.243:3000/products`;
     // setTimeout(() => {
     //
     // }, 2000);

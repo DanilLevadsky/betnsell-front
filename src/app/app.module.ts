@@ -46,6 +46,9 @@ import { AuctionComponent } from './cabinet/auction/auction.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {Overlay, OverlayModule} from '@angular/cdk/overlay';
 import {TestUserService} from '../api/service/test-services/test-user.service';
+import { BalanceModalComponent } from './cabinet/balance/balance-modal/balance-modal.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import {TicketsService} from '../api/service/ticketsService';
 
 
 registerLocaleData(en);
@@ -68,7 +71,8 @@ export function initApp(configService: ConfigService): any {
     ProductShortComponent,
     AuctionShortComponent,
     ProductEditModalComponent,
-    AuctionComponent
+    AuctionComponent,
+    BalanceModalComponent
   ],
   imports: [
     OverlayModule,
@@ -88,8 +92,8 @@ export function initApp(configService: ConfigService): any {
     NzSkeletonModule,
     NzSpinModule,
     NzPaginationModule,
-    NgxSpinnerModule
-
+    NgxSpinnerModule,
+    NzPopoverModule
   ],
   providers: [
     LandingGuard,
@@ -102,6 +106,7 @@ export function initApp(configService: ConfigService): any {
     AuctionsService,
     HttpClientModule,
     TestUserService,
+    TicketsService,
     {
       provide: APP_INITIALIZER,
       useFactory: initApp,

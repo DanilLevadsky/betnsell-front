@@ -1,0 +1,44 @@
+<nz-modal (nzOnCancel)="cancel()"
+          [(nzVisible)]="isActive"
+          [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          [nzTitle]="modalTitle"
+          [nzCloseIcon]="empty"
+          nzClassName="common-modal"
+          nzCentered>
+</nz-modal>
+
+<ng-template #modalTitle>
+  <div class="go-back" (click)="onBackClick()">
+    <img alt="back" src="assets/img/back.svg" class="modal__go-back-img">
+    <div class="modal__go-back">Go back</div>
+  </div>
+</ng-template>
+
+<ng-template #modalContent>
+  <div class="common-modal__header">Refill your balance</div>
+  <div class="common-modal__sub-header">Please, fill in the form above</div>
+  <form (submit)="refillBalance()" [formGroup]="form" class="" nz-form>
+    <nz-form-item class="common-modal__item">
+      <div class="common-modal__field-title">Enter the amount to replenish</div>
+      <nz-form-control class="common-modal__field-control" nzHasFeedback
+                       [nzErrorTip]="'Max. 5000, min. 1'">
+        <label><input placeholder="Max. 5000, min. 1" class="common-modal__input product-modal__title"
+                      formControlName="refill" nz-input type="number"
+        ></label>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="auction-modal__price-container">
+      <div class="auction-modal__price-title">So, there we have the total amount of:</div>
+      <div class="auction-modal__price">{{user.balance + form.controls.refill.value}}</div>
+      <div class="auction-modal__price-title">new balance</div>
+    </div>
+    <button [disabled]="form.invalid"
+            class="common-button common-modal__submit" type="submit">Confirm
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #modalFooter></ng-template>
+<ng-template #empty></ng-template>
+

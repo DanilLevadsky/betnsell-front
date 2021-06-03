@@ -12,6 +12,7 @@ import {ImageConstants} from '../../api/constants/ImageConstants';
 import {Router} from '@angular/router';
 import {AuctionsService} from '../../api/service/auctions.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-cabinet',
@@ -23,6 +24,7 @@ export class CabinetComponent implements OnInit, OnDestroy, AfterViewInit {
   user: UserResponse;
   subscriptions: Array<Subscription> = [];
   cabinetInited: boolean = false;
+  isBalanceModalOpened: boolean = false;
 
 
   constructor(private authService: AuthService,
@@ -31,7 +33,8 @@ export class CabinetComponent implements OnInit, OnDestroy, AfterViewInit {
               private productService: ProductService,
               private auctionService: AuctionsService,
               private router: Router,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private notifications: NzNotificationService) {
   }
 
   get ImageConstants(): typeof ImageConstants {
@@ -75,6 +78,19 @@ export class CabinetComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onProfileClick(): void {
     this.router.navigate(['/app/cabinet']);
+  }
+
+  onAddBalanceClick(): void {
+    this.isBalanceModalOpened = true;
+  }
+
+  onAddBalanceCancel = (): void => {
+    this.isBalanceModalOpened = false;
+  };
+
+  onAddBalanceSuccess = (): void => {
+    this.onAddBalanceCancel();
+    this.notifications.success('Успех!', 'Вы удачно пополнили баланс');
   }
 
 }

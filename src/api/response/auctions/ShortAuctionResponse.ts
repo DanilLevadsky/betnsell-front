@@ -1,5 +1,6 @@
 import {Product} from '../../model/product/Product';
 import {Ticket} from '../../model/auction/Ticket';
+import {AuctionStatus} from '../../model/auction/AuctionStatus';
 
 export class ShortAuctionResponse {
   id: number;
@@ -7,21 +8,17 @@ export class ShortAuctionResponse {
   createdAt: string;
   lotFinishDate: string;
   lotExpireDate: string;
-  pricePerTicket: number;
-  totalTickets: number;
-  winnerId: number;
   totalPrice: number;
+  status: AuctionStatus;
 
-  constructor(id: number, createdAt: string, lotFinishDate: string, lotExpireDate: string, pricePerTicket: number,
-              totalTickets: number, winnerId: number, product: Product, totalPrice: number) {
+  constructor(id: number, createdAt: string, lotFinishDate: string, lotExpireDate: string, product: Product, totalPrice: number,
+              status: AuctionStatus) {
     this.id = id;
     this.createdAt = createdAt;
     this.lotExpireDate = lotExpireDate;
     this.lotFinishDate = lotFinishDate;
-    this.pricePerTicket = pricePerTicket;
-    this.totalTickets = totalTickets;
-    this.winnerId = winnerId;
     this.product = product;
     this.totalPrice = totalPrice;
+    this.status = status;
   }
 }
