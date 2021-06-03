@@ -107,12 +107,6 @@ export function initApp(configService: ConfigService): any {
     HttpClientModule,
     TestUserService,
     TicketsService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initApp,
-      multi: true,
-      deps: [ConfigService]
-    },
     {provide: NZ_I18N, useValue: en_US},
     {
       provide: ErrorHandler,
@@ -122,6 +116,12 @@ export function initApp(configService: ConfigService): any {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsInterceptor,
       multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [ConfigService]
     }
   ],
   bootstrap: [AppComponent]

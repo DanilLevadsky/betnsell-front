@@ -13,9 +13,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient,
               private config: ConfigService) {
-    // setTimeout(() => {
-      this.apiUrl = `http://52.58.171.243:3000`;
-    // }, 2000);
+      this.apiUrl = `${config.getApiEndpoint()}`;
   }
 
   public isLoggedIn(): boolean {

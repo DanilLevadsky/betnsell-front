@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {mapTo, tap} from 'rxjs/operators';
+import {map, mapTo, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable()
@@ -14,9 +14,7 @@ export class ConfigService{
   load(): Observable<void> {
     return this.httpClient.get('/assets/config.json')
       .pipe(
-        tap((configuration: any) => {
-          this.configuration = configuration
-        }),
+        tap((configuration: any) => this.configuration = configuration),
         mapTo(undefined),
       );
   }

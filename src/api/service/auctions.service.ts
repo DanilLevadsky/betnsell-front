@@ -13,23 +13,11 @@ export class AuctionsService {
 
   apiUrl: string;
 
-  // allAuctions: BehaviorSubject<Array<Auction>> = new BehaviorSubject<Array<Auction>>([]);
-
   constructor(private config: ConfigService,
               private httpClient: HttpClient,
               private baseService: BaseService) {
-    this.apiUrl = 'http://52.58.171.243:3000/auctions';
+    this.apiUrl = `${this.config.getApiEndpoint()}/auctions`;
   }
-
-  // setAuctions(auctions: Array<Auction>): void {
-  //   this.allAuctions.next(auctions);
-  // }
-  //
-  // setAuction(auction: Auction): void {
-  //   const currentArray: Array<Auction> = this.allAuctions.getValue();
-  //   currentArray.push(auction);
-  //   this.allAuctions.next(currentArray);
-  // }
 
   createAuction(request: AuctionCreateRequest): Observable<Auction> {
     return this.httpClient.put<Auction>(`${this.apiUrl}/create`, request);
