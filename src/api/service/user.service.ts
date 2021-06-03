@@ -27,7 +27,7 @@ export class UserService {
   constructor(private config: ConfigService,
               private httpClient: HttpClient,
               private baseService: BaseService) {
-    this.apiUrl = `${this.config.getApiEndpoint()}/users`;
+    this.apiUrl = `http://52.58.171.243:3000/users`;
   }
 
   updateUserUsername(updatedUsername: UpdatedUserUsername): Observable<UserResponse> {

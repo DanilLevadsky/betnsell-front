@@ -19,7 +19,7 @@ export class ProductService {
 
   constructor(private config: ConfigService,
               private httpClient: HttpClient) {
-    this.apiUrl = `${config.getApiEndpoint()}/products`;
+    this.apiUrl = `http://52.58.171.243:3000/products`;
   }
 
   createProduct(request: ProductCreateRequest): Observable<Product> {

@@ -12,7 +12,7 @@ export class TicketsService{
 
   constructor(private httpClient: HttpClient,
               private config: ConfigService){
-    this.apiUrl = `${this.config.getApiEndpoint()}/tickets`;
+    this.apiUrl = `http://52.58.171.243:3000/tickets`;
   }
 
   purchaseTickets(request: TicketsPurchaseRequest): Observable<TicketsPurchaseResponse> {

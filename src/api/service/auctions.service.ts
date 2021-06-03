@@ -16,7 +16,7 @@ export class AuctionsService {
   constructor(private config: ConfigService,
               private httpClient: HttpClient,
               private baseService: BaseService) {
-    this.apiUrl = `${this.config.getApiEndpoint()}/auctions`;
+    this.apiUrl = `http://52.58.171.243:3000/auctions`;
   }
 
   createAuction(request: AuctionCreateRequest): Observable<Auction> {
